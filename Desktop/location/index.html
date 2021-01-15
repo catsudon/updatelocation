@@ -3,8 +3,27 @@
 <body>
 
 <p id="demo"></p>
+<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-analytics.js"></script>
 
+<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-database.js"></script>
 <script>
+
+var firebaseConfig = {
+   apiKey: "AIzaSyCw_49PBNi0lThadQlq8XRwykkOPqrx4u4",
+   authDomain: "buranakarn-8b093.firebaseapp.com",
+   databaseURL: "https://buranakarn-8b093.firebaseio.com",
+   projectId: "buranakarn-8b093",
+   storageBucket: "buranakarn-8b093.appspot.com",
+   messagingSenderId: "836043587292",
+   appId: "1:836043587292:web:1dd49026cac93aeb64fe19",
+   measurementId: "G-2FTBDM8YCB"
+ };
+ // Initialize Firebase
+ firebase.initializeApp(firebaseConfig);
+ firebase.analytics();
+var la = firebase.database().ref('lati');
+var long = firebase.database().ref('long');
 var x = document.getElementById("demo");
 
   if (navigator.geolocation) {
@@ -16,19 +35,10 @@ var x = document.getElementById("demo");
 function showPosition(position) {
   x.innerHTML = "Latitude: " + position.coords.latitude + 
   "<br>Longitude: " + position.coords.longitude;
+  la = position.coords.latitude;
+  long = position.coords.longitude;
 
-  var xhr = new XMLHttpRequest();
-  var value =
-      {
-            "payload" : "message= " + position.coords.latitude+","+position.coords.longtitude,
-      }
-  xhr.open("POST", "https://notify-api.line.me/api/notify", true);
-  xhr.setRequestHeader('Authorization','Bearer 5MqXJaBoXJVI1FKZ63B46D8qNbZYQmYFO5WjTo4Govx');
-  xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
-  var s = xhr.send(JSON.stringify({
-    value: value
-}));
-  console.log(s);
+
 
       };
 </script>
