@@ -35,8 +35,8 @@ var x = document.getElementById("demo");
 function showPosition(position) {
   x.innerHTML = "Latitude: " + position.coords.latitude + 
   "<br>Longitude: " + position.coords.longitude;
-  la = position.coords.latitude;
-  long = position.coords.longitude;
+  la.set(position.coords.latitude);
+  long.set(position.coords.longitude);
 
 
 
